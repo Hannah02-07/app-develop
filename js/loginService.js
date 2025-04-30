@@ -9,15 +9,17 @@ document.getElementById('loginForm').addEventListener('submit', function(e){
 });
 
 function login(email, password){
+    localStorage.removeItem('token')
     let message=''
     let alertType= ''
 
     const REQRES_ENDPOINT ='https://reqres.in/api/login'
     fetch(REQRES_ENDPOINT,{
 
-        method:'post',
-        header: {
-            'content-type':'application/json'
+        method:'POST',
+        headers: {
+            'Content-type':'application/json',
+            'x-api-key':'reqres-free-v1'
         },
         body: JSON.stringify({email,password})
     })
@@ -27,11 +29,22 @@ function login(email, password){
 
             alertType= 'success'
             message = 'inicio de seccion exitoso'
+            alertBuilder(alertType,message)
+            localStorage.setItem('token','jaiuhn9283kiij92jm')
+            setTimeout(()=>{
+                location.href='admin/dashboard.html'
+
+            },2000)//2000ms=2s
+
+          
+
 
         }else{
 
             alertType='danger'
           message='correo o contraseña invalida'
+          alertBuilder(alertType,message)
+
 
         }
        
@@ -45,8 +58,7 @@ function login(email, password){
         
         console.log('error inesperado',error)
 
-        alertBuilder(alertType,message)
-
+       
     })
 
 
