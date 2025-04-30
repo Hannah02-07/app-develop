@@ -23,8 +23,18 @@ function login(email, password){
     })
 
     .then((response) =>{
-        alertType= 'success'
-        message = 'inicio de seccion exitoso'
+        if(response.status===200){
+
+            alertType= 'success'
+            message = 'inicio de seccion exitoso'
+
+        }else{
+
+            alertType='danger'
+          message='correo o contraseña invalida'
+
+        }
+       
         console.log('respuesta del servicio', response)
         alertBuilder(alertType,message)
     })
@@ -32,7 +42,8 @@ function login(email, password){
     .catch((error)=>{
         alertType='danger'
         message='correo o contraseña invalida'
-        console.log('error en el servicio',error)
+        
+        console.log('error inesperado',error)
 
         alertBuilder(alertType,message)
 
