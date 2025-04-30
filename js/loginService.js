@@ -19,14 +19,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e){
         tipoAlerta='danger'
     }
 
-    let alerta = `
-     <div class="alert alert-${tipoAlerta} alert-dismissible fade show" role="alert">
-                           ${mensaje}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                          </div>
-
-    `
-    document.getElementById('mensaje').innerHTML= alerta;
+    
     
     
 
@@ -45,4 +38,32 @@ function login(email, password){
         },
         body: JSON.stringify({email,password})
     })
+
+    .then((response) =>{
+        alertType= 'success'
+        message = 'inicio de seccion exitoso'
+        console.log('respuesta del servicio', response)
+    })
+
+    .catch((error)=>{
+        alertType='danger'
+        message='correo o contraseña invalida'
+        console.log('error en el servicio',error)
+
+    })
+
+}
+
+
+function alertBuilder(alertType, message){
+
+    let alerta = `
+    <div class="alert alert-${tipoAlerta} alert-dismissible fade show" role="alert">
+                          ${mensaje}
+                           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                         </div>
+
+   `
+   document.getElementById('mensaje').innerHTML= alerta;
+
 }
