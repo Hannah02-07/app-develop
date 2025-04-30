@@ -3,25 +3,8 @@ document.getElementById('loginForm').addEventListener('submit', function(e){
     e.preventDefault();
     const email = document.getElementById('email').value;
     const password =document.getElementById('password').value;
-    let mensaje = ''
-    let tipoAlerta=''
-    
-    if (email=== ''|| password===''){
-        mensaje='por favor completa todos los campos'
-        tipoAlerta='warning'
 
-    } else if(email==='prueba@gmail.com'&& password==='123456'){
-       mensaje='Inicio de sesion exitoso. '
-       tipoAlerta='succes'
-
-    }else{
-        mensaje='correo o contraseña incorrectos. '
-        tipoAlerta='danger'
-    }
-
-    
-    
-    
+    login(email,password)
 
 });
 
@@ -43,6 +26,7 @@ function login(email, password){
         alertType= 'success'
         message = 'inicio de seccion exitoso'
         console.log('respuesta del servicio', response)
+        alertBuilder(alertType,message)
     })
 
     .catch((error)=>{
@@ -50,20 +34,25 @@ function login(email, password){
         message='correo o contraseña invalida'
         console.log('error en el servicio',error)
 
+        alertBuilder(alertType,message)
+
     })
+
+
+   
 
 }
 
 
 function alertBuilder(alertType, message){
 
-    let alerta = `
-    <div class="alert alert-${tipoAlerta} alert-dismissible fade show" role="alert">
-                          ${mensaje}
+    let alert = `
+    <div class="alert alert-${alertType} alert-dismissible fade show" role="alert">
+                          ${message}
                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                          </div>
 
    `
-   document.getElementById('mensaje').innerHTML= alerta;
+   document.getElementById('mensaje').innerHTML= alert;
 
 }
