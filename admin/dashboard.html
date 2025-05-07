@@ -10,11 +10,35 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <nav class="navbar bg-info">
-                    <div class="container-fluid">
-                      <span class="navbar-brand mb-0 h1">Empresa M&H</span>
-                    </div>
-                  </nav>
+              <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">Empresa H&M</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="dashboard.html">inicio</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#users" onclick="users()">usuarios</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#products" onclick="products()">productos</a>
+                      </li>
+                     
+                      <li class="nav-item"></li>
+                        <a class="nav-link" href="#logout" onclick="logout()">salir</a>
+                      </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                  </div>
+                </div>
+              </nav>
 
 
             </div>
@@ -27,7 +51,7 @@
                       <h5>Informacion del usuario</h5>
                     </div>
                     <div class="card-body">
-                       <div id="mensaje"></div>
+                       <div id="info"></div>
                        <h1>Bienvenid@ a nuestra app</h1>
 
                        
@@ -55,6 +79,6 @@
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-    <script src="js/loginService.js"></script>
+    <script src="../js/dashboardService.js"></script>
   </body>
 </html>
