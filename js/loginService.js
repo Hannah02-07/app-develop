@@ -31,7 +31,11 @@ function login(email, password){
             alertType= 'success'
             message = 'inicio de seccion exitoso'
             alertBuilder(alertType,message)
-            localStorage.setItem('token','jaiuhn9283kiij92jm')
+            response.json().then((data)=>{
+                localStorage.setItem('token',data.token)
+
+
+            })
             setTimeout(()=>{
                 location.href='admin/dashboard.html'
 
