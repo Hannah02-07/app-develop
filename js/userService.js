@@ -267,3 +267,65 @@ function saveUser(){
 
 
 }
+let usuarios = [];
+let usuarioActual = null;
+
+// Obtener usuarios desde la API de Reqres
+function cargarUsuarios() {
+  fetch("https://reqres.in/api/users?page=1")
+    .then(res => res.json())
+    .then(data => {
+      usuarios = data.data; // El array de usuarios está en "data"
+      mostrarTabla();
+    });
+}
+
+function mostrarTabla() {
+  const tbody = document.querySelector("#tablaUsuarios tbody");
+  tbody.innerHTML = "";
+
+  usuarios.forEach((usuario, index) => {
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${usuario.id}</td>
+      <td>${usuario.first_name} ${usuario.last_name}</td>
+      <td>${usuario.email}</td>
+      <td>
+        <button class="btn btn-primary btn-sm" onclick="verUsuario(${index})">Ver</button>
+      </td>
+    `;
+    tbody.appendChild(fila);
+  });
+}
+
+function verUsuario(indice) {
+  usuarioActual = usuarios[indice];
+  document.getElementById("cardNombre").textContent =
+    usuarioActual.first_name + " " + usuarioActual.last_name;
+  document.getElementById("cardEmail").textContent = usuarioActual.email;
+  document.getElementById("cardUsuario").classList.remove("d-none");
+}
+
+document.getElementById("btnEliminar").addEventListener("click", () => {
+  if (!usuarioActual || !confirm("¿Deseas eliminar este usuario?")) return;
+
+  fetch(`https://reqres.in/api/users/${usuarioActual.id}`, {
+    method: "DELETE",
+  })
+    .then(res => {
+      if (res.status === 204) {
+        // Eliminación exitosa (aunque no real)
+        usuarios = usuarios.filter(u => u.id !== usuarioActual.id);
+        usuarioActual = null;
+        document.getElementById("cardUsuario").classList.add("d-none");
+        mostrarTabla();
+      } else {
+        throw new Error("No se pudo eliminar");
+      }
+    })
+    .catch(err => {
+      alert("Error al eliminar: " + err.message);
+    });
+});
+
+cargarUsuarios();
